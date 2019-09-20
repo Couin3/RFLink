@@ -66,10 +66,22 @@ void setup() {
   PKSequenceNumber++;
   PluginInit();
   //  PluginTXInit();
+  
+  #if defined(MQTT_ACTIVATED) && defined(ESP32) || defined(ESP8266)
+  setup_wifi();
+  setup_MQTT();
+  #endif
 }
 
 void loop() {
-  ScanEvent();
+
+  if (ScanEvent()){
+  #if defined(MQTT_ACTIVATED) && defined(ESP32) || defined(ESP8266)
+    publishMsg();
+  #endif
+  }
   //  CheckSerial();
+
+
 }
 /*********************************************************************************************/

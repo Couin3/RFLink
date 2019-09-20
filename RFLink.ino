@@ -58,7 +58,7 @@
 #define PIN_RF_RX_VCC           NOT_A_PIN               // Power to the receiver on this pin
 #define PIN_RF_RX_GND           NOT_A_PIN               // Ground to the receiver on this pin
 #define PIN_RF_RX_DATA          D1                      // On this input, the 433Mhz-RF signal is received. LOW when no signal.
-
+#define MQTT_ACTIVATED
 /*
   // Mega
   #define PIN_BSF_0                   22                // Board Specific Function lijn-0
