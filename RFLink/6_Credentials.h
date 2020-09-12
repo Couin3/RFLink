@@ -21,7 +21,11 @@ String WIFI_PSWD = "your_AP_passwd";
 String WIFI_IP = "192.168.0.199";
 String WIFI_DNS = "8.8.8.8";
 String WIFI_GATEWAY = "192.168.0.1";
+<<<<<<< HEAD
 String WIFI_SUBNET = "255.255.255.0";
+=======
+String WIFI_SUBNET = "255.255.2550";
+>>>>>>> a24f2c7... Facilitate use of DHCP instead of static IP
 #endif
 
 // MQTT Server
