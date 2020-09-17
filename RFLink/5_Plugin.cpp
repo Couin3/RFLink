@@ -9,17 +9,9 @@
 #include "RFLink.h"
 #include "2_Signal.h"
 #include "5_Plugin.h"
-#ifdef AUTOCONNECT_ENABLED
-#include "9_AutoConnect.h"
-#ifdef ESP8266
 #include <FS.h>
 #include <LittleFS.h>
-#elif ESP32
-#include <SPIFFS.h>
-#define LittleFS SPIFFS
-#endif // ESP8266
 #include <ArduinoJson.h>
-#endif // AUTOCONNECT
 
 boolean (*Plugin_ptr[PLUGIN_MAX])(byte, char *); // Receive plugins
 byte Plugin_id[PLUGIN_MAX];
@@ -36,7 +28,6 @@ boolean RFDebug = RFDebug_0;     // debug RF signals with plugin 001 (no decode)
 boolean QRFDebug = QRFDebug_0;   // debug RF signals with plugin 001 but no multiplication (faster?, compact)
 boolean RFUDebug = RFUDebug_0;   // debug RF signals with plugin 254 (decode 1st)
 boolean QRFUDebug = QRFUDebug_0; // debug RF signals with plugin 254 but no multiplication (faster?, compact)
-
 
 /**********************************************************************************************\
  * Load plugins
@@ -1697,41 +1688,70 @@ void PluginInit(void)
 #endif
 
 // read config file to desactivated protocols
-#ifdef AUTOCONNECT_ENABLED
-  LittleFS.begin();
-  Serial.print("Param ");
-  Serial.print(PROTOCOL_FILE);
-  Serial.print(F(" :\t"));
-  File configFile = LittleFS.open(PROTOCOL_FILE, "r");
-  if (configFile)
-  {
-    // const int capacity = JSON_ARRAY_SIZE(254) + 2 * JSON_OBJECT_SIZE(2); // 4128
-    // StaticJsonDocument<4128> doc;
-    DynamicJsonDocument doc(4128);
+#define PLUGINS_FILE "/Plugins.json"
 
-    if (deserializeJson(doc, configFile))
-    {
-      Serial.println(F("Failed to load"));
-    }
-    else
-    {
-      for (x = 0; x < PLUGIN_MAX; x++)
-      {
-        if (doc[x][String(Plugin_id[x])] == 0)
-          Plugin_State[x] = P_Disabled;
-      }
-      Serial.println(F("Loaded"));
-    }
-    doc.clear();
-    configFile.close();
-  }
+  File file;
+  StaticJsonDocument<1024> doc;
+  DeserializationError error;
+
+  Serial.print(F("Mount LittleFS : "));
+  if (!LittleFS.begin())
+
+    Serial.println(F("failed"));
   else
   {
-    Serial.println(F("Failed to open(+r)"));
+    Serial.println(F("done"));
+
+    Serial.print(F("Opening file "));
+    Serial.print(PLUGINS_FILE);
+    Serial.print(" : ");
+    file = LittleFS.open(PLUGINS_FILE, "r");
+    if (!file)
+      Serial.println(F("failed"));
+    else
+    {
+      Serial.println(F("done"));
+
+      // Deserialize the JSON document
+      error = deserializeJson(doc, file);
+
+      // Close the file (Curiously, File's destructor doesn't close the file)
+      file.close();
+
+      if (error)
+        Serial.println(F("Failed to read file, using default configuration"));
+      else
+      {
+        // extract the values
+        JsonArray array = doc.as<JsonArray>();
+
+        byte xx = 0;
+        for (JsonVariant v : array)
+        {
+          for (x = xx; x < PLUGIN_MAX; x++)
+          {
+            if (Plugin_id[x] < v.as<byte>())
+              Plugin_State[x] = P_Disabled;
+            else if (Plugin_id[x] > v.as<byte>())
+            {
+              xx = x;
+              break;
+            }
+          }
+        }
+
+        // Above max number are disabled too
+        for (x = xx; x < PLUGIN_MAX; x++)
+          Plugin_State[x] = P_Disabled;
+
+        doc.clear();
+        doc.garbageCollect();
+
+        // Serial.println(F("Loaded"));
+      }
+    }
   }
   LittleFS.end();
-
-#endif // AUTOCONNECT_ENABLED
 
   // Initialiseer alle plugins door aanroep met verwerkingsparameter PLUGIN_INIT
   PluginInitCall(0, 0);

@@ -1,0 +1,11 @@
+{
+    "RFDebug": "false",
+    "QRFDebug": "false",
+    "RFUDebug": "false",
+    "QRFUDebug": "false",
+    "SERIAL_ENABLED": "true",
+    "BAUD": 57600,
+    "OLED_ENABLED": "false",
+    "OLED_CONTRAST": 32,
+    "OLED_FLIP": "true"
+}

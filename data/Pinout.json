@@ -1,0 +1,19 @@
+{
+    "PIN_RF_RX_PMOS": "NOT_A_PIN",
+    "PIN_RF_RX_NMOS": "D5",
+    "PIN_RF_RX_VCC": "NOT_A_PIN",
+    "PIN_RF_RX_GND": "NOT_A_PIN",
+    "PIN_RF_RX_NA": "NOT_A_PIN",
+    "PIN_RF_RX_DATA": "NOT_A_PIN",
+    "PIN_RF_TX_PMOS": "NOT_A_PIN",
+    "PIN_RF_TX_NMOS": "D7",
+    "PIN_RF_TX_VCC": "NOT_A_PIN",
+    "PIN_RF_TX_GND": "NOT_A_PIN",
+    "PIN_RF_TX_NA": "NOT_A_PIN",
+    "PIN_RF_TX_DATA": "NOT_A_PIN",
+    "PULLUP_RF_RX_DATA": false,
+    "PIN_OLED_GND": "NOT_A_PIN",
+    "PIN_OLED_VCC": "NOT_A_PIN",
+    "PIN_OLED_SCL": "D1",
+    "PIN_OLED_SDA": "D2"
+}

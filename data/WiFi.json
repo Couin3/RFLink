@@ -1,0 +1,9 @@
+{
+    "WIFI_PWR": 10,
+    "WIFI_SSID": "your_AP_ssid",
+    "WIFI_PSWD": "your_AP_passwd",
+    "WIFI_IP": "192.168.0.199",
+    "WIFI_DNS": "8.8.8.8",
+    "WIFI_GATEWAY": "192.168.0.1",
+    "WIFI_SUBNET": "255.255.255.0"
+}

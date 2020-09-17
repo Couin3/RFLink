@@ -15,6 +15,11 @@
 #include "8_OLED.h"
 #include <U8x8lib.h> // Comment to avoid dependency graph inclusion
 
+uint8_t PIN_OLED_GND;
+uint8_t PIN_OLED_VCC;
+uint8_t PIN_OLED_SCL;
+uint8_t PIN_OLED_SDA;
+
 #define U8X8_PIN_NONE 255
 // 0.91" I2C 128x32 Display
 // U8X8_SSD1306_128X32_UNIVISION_HW_I2C u8x8(/* reset=*/U8X8_PIN_NONE, /* clock=*/PIN_OLED_SCL, /* data=*/PIN_OLED_SDA);

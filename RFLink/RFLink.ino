@@ -25,7 +25,7 @@
 #include "5_Plugin.h"
 #include "6_WiFi_MQTT.h"
 #include "8_OLED.h"
-#include "9_AutoConnect.h"
+#include "9_FileConfig.h"
 
 #if (defined(__AVR_ATmega328P__) || defined(__AVR_ATmega2560__))
 #include <avr/power.h>
@@ -84,23 +84,21 @@ void setup()
   Serial.println(__FILE__); // "RFLink.ino" version is in 20;00 Message
   Serial.println(F("Compiled on :\t\t" __DATE__ " at " __TIME__));
 
-#if (!defined(AUTOCONNECT_ENABLED) && !defined(MQTT_ENABLED))
+  load_JSON_config();
+  PluginInit();
+  PluginTXInit();
+
+#if (!defined(MQTT_ENABLED))
   setup_WIFI_OFF();
 #endif
 #endif // ESP32 || ESP8266
 
-#if (!defined(AUTOCONNECT_ENABLED) && defined(MQTT_ENABLED))
+#if (defined(MQTT_ENABLED))
   setup_WIFI();
   setup_MQTT();
   reconnect();
 #endif
 
-  PluginInit();
-  PluginTXInit();
-
-#ifdef AUTOCONNECT_ENABLED
-  setup_AutoConnect();
-#endif
   set_Radio_mode(Radio_OFF);
 #if ((defined(ESP8266) || defined(ESP32)) && !defined(RFM69_ENABLED))
   show_Radio_Pin();
@@ -134,34 +132,20 @@ void setup()
 
 void loop()
 {
-#ifdef AUTOCONNECT_ENABLED
-  loop_AutoConnect();
-  if (WiFi.status() == WL_CONNECTED)
-  {
-#endif
 #ifdef MQTT_ENABLED
-    checkMQTTloop();
-    sendMsg();
+  checkMQTTloop();
+  sendMsg();
 #endif
 
 #ifdef SERIAL_ENABLED
 #if PIN_RF_TX_DATA_0 != NOT_A_PIN
-    if (CheckSerial())
-      sendMsg();
+  if (CheckSerial())
+    sendMsg();
 #endif
 #endif
 
-#ifdef AUTOCONNECT_ENABLED
-    if (CheckWeb(CmdMsg))
-      sendMsg();
-#endif
-
-    if (ScanEvent())
-      sendMsg();
-
-#ifdef AUTOCONNECT_ENABLED
-  }
-#endif
+  if (ScanEvent())
+    sendMsg();
 }
 
 void sendMsg()
@@ -173,9 +157,6 @@ void sendMsg()
 #endif
 #ifdef MQTT_ENABLED
     publishMsg();
-#endif
-#ifdef AUTOCONNECT_ENABLED
-    LastMsg = pbuffer;
 #endif
 #ifdef OLED_ENABLED
     print_OLED();

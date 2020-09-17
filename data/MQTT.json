@@ -1,0 +1,11 @@
+{
+    "MQTT_LOOP_MS": 1000,
+    "MQTT_RETAINED": "false",
+    "MQTT_SERVER": "raspberrypi.local",
+    "MQTT_PORT": 1883,
+    "MQTT_ID": "ESP8266-RFLink",
+    "MQTT_USER": "your_MQTT_user",
+    "MQTT_PSWD": "your_MQTT_pswd",
+    "MQTT_TOPIC_OUT": "/RFLink/msg",
+    "MQTT_TOPIC_IN": "/RFLink/cmd"
+}

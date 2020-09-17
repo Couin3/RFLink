@@ -21,7 +21,6 @@
 
 // WIFI
 #define WIFI_PWR_0 10 // 0~20.5dBm
-#define AUTOCONNECT_ENABLED
 
 // MQTT messages
 #define MQTT_ENABLED          // Send RFLink messages over MQTT
