@@ -11,6 +11,20 @@
 #include "RFLink.h"
 #ifndef AUTOCONNECT_ENABLED
 
+// Device
+const char* DeviceName = "RFLink";
+
+// WiFiManager AP
+const char* WiFiManager_SSID = DeviceName;
+IPAddress WiFiManager_IP = IPAddress(192,168,1,1);
+IPAddress WiFiManager_Gateway = IPAddress(192,168,1,1);
+IPAddress WiFiManager_SubNet = IPAddress(255,255,255,0);
+
+// FOTA file http address
+#ifdef FOTA_ENABLED
+String FOTA_FILE = "http://mon.serveur.fr/RFLink/firmware.bin";
+#endif
+
 // local AP
 String WIFI_SSID = "your_AP_ssid";
 String WIFI_PSWD = "your_AP_passwd";
@@ -21,11 +35,7 @@ String WIFI_PSWD = "your_AP_passwd";
 String WIFI_IP = "192.168.0.199";
 String WIFI_DNS = "8.8.8.8";
 String WIFI_GATEWAY = "192.168.0.1";
-<<<<<<< HEAD
 String WIFI_SUBNET = "255.255.255.0";
-=======
-String WIFI_SUBNET = "255.255.2550";
->>>>>>> a24f2c7... Facilitate use of DHCP instead of static IP
 #endif
 
 // MQTT Server

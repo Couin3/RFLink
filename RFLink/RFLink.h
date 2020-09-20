@@ -21,7 +21,9 @@
 
 // WIFI
 #define WIFI_PWR_0 10 // 0~20.5dBm
-#define AUTOCONNECT_ENABLED
+//#define AUTOCONNECT_ENABLED
+#define WIFIMANAGER_ENABLED   // You must choose between AutoConnect or WiFiManager
+#define FOTA_ENABLED          // Firmware Over The Air update
 
 // MQTT messages
 #define MQTT_ENABLED          // Send RFLink messages over MQTT

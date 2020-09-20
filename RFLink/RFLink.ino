@@ -26,6 +26,7 @@
 #include "6_WiFi_MQTT.h"
 #include "8_OLED.h"
 #include "9_AutoConnect.h"
+#include "10_WiFiManager_FOTA.h"
 
 #if (defined(__AVR_ATmega328P__) || defined(__AVR_ATmega2560__))
 #include <avr/power.h>
@@ -84,12 +85,12 @@ void setup()
   Serial.println(__FILE__); // "RFLink.ino" version is in 20;00 Message
   Serial.println(F("Compiled on :\t\t" __DATE__ " at " __TIME__));
 
-#if (!defined(AUTOCONNECT_ENABLED) && !defined(MQTT_ENABLED))
+#if (!defined(AUTOCONNECT_ENABLED) && !defined(WIFIMANAGER_ENABLED) && !defined(MQTT_ENABLED))
   setup_WIFI_OFF();
 #endif
 #endif // ESP32 || ESP8266
 
-#if (!defined(AUTOCONNECT_ENABLED) && defined(MQTT_ENABLED))
+#if (!defined(AUTOCONNECT_ENABLED) && !defined(WIFIMANAGER_ENABLED) && defined(MQTT_ENABLED))
   setup_WIFI();
   setup_MQTT();
   reconnect();
@@ -100,6 +101,9 @@ void setup()
 
 #ifdef AUTOCONNECT_ENABLED
   setup_AutoConnect();
+#endif
+#ifdef WIFIMANAGER_ENABLED
+  SetUpWiFiManager();
 #endif
   set_Radio_mode(Radio_OFF);
 #if ((defined(ESP8266) || defined(ESP32)) && !defined(RFM69_ENABLED))
@@ -134,8 +138,10 @@ void setup()
 
 void loop()
 {
-#ifdef AUTOCONNECT_ENABLED
+#ifdef AUTOCONNECT_ENABLED 
   loop_AutoConnect();
+#endif
+#if defined(AUTOCONNECT_ENABLED) || defined(WIFIMANAGER_ENABLED)
   if (WiFi.status() == WL_CONNECTED)
   {
 #endif
@@ -159,7 +165,7 @@ void loop()
     if (ScanEvent())
       sendMsg();
 
-#ifdef AUTOCONNECT_ENABLED
+#if defined(AUTOCONNECT_ENABLED) || defined(WIFIMANAGER_ENABLED)
   }
 #endif
 }
