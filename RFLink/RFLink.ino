@@ -26,6 +26,7 @@
 #include "6_WiFi_MQTT.h"
 #include "8_OLED.h"
 #include "9_AutoConnect.h"
+#include "10_WiFiManager_FOTA.h"
 
 #if (defined(__AVR_ATmega328P__) || defined(__AVR_ATmega2560__))
 #include <avr/power.h>
@@ -134,8 +135,10 @@ void setup()
 
 void loop()
 {
-#ifdef AUTOCONNECT_ENABLED
+#ifdef AUTOCONNECT_ENABLED 
   loop_AutoConnect();
+#endif
+#if defined(AUTOCONNECT_ENABLED) || defined(WIFIMANAGER_ENABLED)
   if (WiFi.status() == WL_CONNECTED)
   {
 #endif
@@ -159,7 +162,7 @@ void loop()
     if (ScanEvent())
       sendMsg();
 
-#ifdef AUTOCONNECT_ENABLED
+#if defined(AUTOCONNECT_ENABLED) || defined(WIFIMANAGER_ENABLED)
   }
 #endif
 }

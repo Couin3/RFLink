@@ -11,6 +11,20 @@
 #include "RFLink.h"
 #ifndef AUTOCONNECT_ENABLED
 
+// Device
+const char* DeviceName = "RFLink";
+
+// WiFiManager AP
+const char* WiFiManager_SSID = DeviceName;
+IPAddress WiFiManager_IP = IPAddress(192,168,1,1);
+IPAddress WiFiManager_Gateway = IPAddress(192,168,1,1);
+IPAddress WiFiManager_SubNet = IPAddress(255,255,255,0);
+
+// FOTA file http address
+#ifdef FOTA_ENABLED
+String FOTA_FILE = "http://www.monsite.fr/RFLink/firmware.bin";
+#endif
+
 // local AP
 String WIFI_SSID = "your_AP_ssid";
 String WIFI_PSWD = "your_AP_passwd";
