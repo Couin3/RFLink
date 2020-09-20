@@ -35,7 +35,7 @@ String WIFI_PSWD = "your_AP_passwd";
 String WIFI_IP = "192.168.0.199";
 String WIFI_DNS = "8.8.8.8";
 String WIFI_GATEWAY = "192.168.0.1";
-String WIFI_SUBNET = "255.255.2550";
+String WIFI_SUBNET = "255.255.255.0";
 #endif
 
 // MQTT Server
