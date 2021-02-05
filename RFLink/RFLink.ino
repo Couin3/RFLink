@@ -109,7 +109,7 @@ void setup()
     #endif // USE_OTA
   #endif // USE_WIFIMANAGER
   setup_MQTT();
-  reconnect();
+  reconnect(1);
 #else
   #ifndef USE_WIFIMANAGER
   setup_WIFI_OFF();
@@ -151,6 +151,10 @@ void loop()
 #ifdef MQTT_ENABLED
   checkMQTTloop();
   sendMsg();
+#endif
+
+#ifdef USE_WIFIMANAGER
+wifiManager.process();
 #endif
 
 #if defined(USE_OTA) && ( defined(USE_WIFIMANAGER) || defined(MQTT_ENABLED))
