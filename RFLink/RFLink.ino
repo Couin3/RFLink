@@ -87,8 +87,8 @@ void setup()
   Serial.println(F("Compiled on :\t\t" __DATE__ " at " __TIME__));
 
 #ifdef USE_WIFIMANAGER
-  setup_WifiManager();
-  start_WifiManager();
+  RFLink::Wifi::setup_WifiManager();
+  RFLink::Wifi::start_WifiManager();
   #ifdef USE_OTA
     #ifdef OTA_PASSWORD
       ArduinoOTA.setPassword(OTA_PASSWORD);
@@ -154,7 +154,7 @@ void loop()
 #endif
 
 #ifdef USE_WIFIMANAGER
-wifiManager.process();
+RFLink::Wifi::wifiManager.process();
 #endif
 
 #if defined(USE_OTA) && ( defined(USE_WIFIMANAGER) || defined(MQTT_ENABLED))
@@ -162,17 +162,17 @@ wifiManager.process();
 #endif
 
 #if defined(USE_WIFIMANAGER) && defined(SHOW_CONFIG_PORTAL_PIN_BUTTON) && SHOW_CONFIG_PORTAL_PIN_BUTTON != NOT_A_PIN
-  if (!wifiManager.getConfigPortalActive()) {
+  if (!RFLink::Wifi::wifiManager.getConfigPortalActive()) {
     if(digitalRead(SHOW_CONFIG_PORTAL_PIN_BUTTON) == HIGH) {
       Serial.println("Config portal requested");
-      wifiManager.setConfigPortalBlocking(false);
-      wifiManager.startConfigPortal();
+      RFLink::Wifi::wifiManager.setConfigPortalBlocking(false);
+      RFLink::Wifi::wifiManager.startWebPortal();
       Serial.println("Config portal started");
       sleep(4);
     }
   } else if(digitalRead(SHOW_CONFIG_PORTAL_PIN_BUTTON) == HIGH) {
     Serial.println("shutting down portal");
-    wifiManager.stopConfigPortal();
+    RFLink::Wifi::wifiManager.stopConfigPortal();
     Serial.println("done");
     sleep(4);
   }
