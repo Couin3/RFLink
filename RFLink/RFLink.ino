@@ -135,12 +135,6 @@ void loop()
 RFLink::Wifi::mainLoop();
 #endif
 
-#if defined(RFLINK_OTA_ENABLED) && ( defined(RFLINK_WIFIMANAGER_ENABLED) || defined(MQTT_ENABLED))
-  ArduinoOTA.handle();
-#endif
-
-
-
 #ifdef SERIAL_ENABLED
 #if PIN_RF_TX_DATA_0 != NOT_A_PIN
   if (CheckSerial())
