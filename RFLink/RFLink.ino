@@ -123,21 +123,7 @@ void setup()
   set_Radio_mode(Radio_RX);
 
 #ifdef RFLINK_ASYNC_RECEIVER_ENABLED
-  #ifdef RFLINK_OTA_ENABLED
-  // we must stop the Receiver from interrupting the OTA process
-  ArduinoOTA.onStart( [](){
-    Serial.println("20;XX;DEBUG;MSG=OTA requested, turning off Receiver");
-    AsyncSignalScanner::stopScanning();
-    }
-  );
-  ArduinoOTA.onError( [](ota_error_t error){
-    Serial.print("20;XX;DEBUG;MSG=OTA failed with error code #");
-    Serial.print(error);
-    Serial.println(" ,turning on Receiver");
-    AsyncSignalScanner::startScanning();
-    }
-  );
-  #endif // RFLINK_OTA_ENABLED
+  AsyncSignalScanner::startScanning();
 #endif // RFLINK_ASYNC_RECEIVER_ENABLED
 
 }
