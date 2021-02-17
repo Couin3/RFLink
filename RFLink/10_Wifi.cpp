@@ -130,7 +130,9 @@ void paramsUpdatedCallback(){
   Serial.println("Some parameters have changed, restart Mqtt Client is requested");
   RFLink::Mqtt::reconnect(1, true);
 }
-#endif
+#endif // ESP32
+
+#endif // MQTT_ENABLED
 
 namespace types {
   enum portalActions {
