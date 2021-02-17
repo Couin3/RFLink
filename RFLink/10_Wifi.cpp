@@ -21,9 +21,6 @@
 #include "ArduinoNvs.h"
 #endif
 
-#ifdef RFLINK_WIFI_ENABLED
-#include "WiFi.h"
-#endif
 
 
 #ifdef RFLINK_WIFIMANAGER_ENABLED
