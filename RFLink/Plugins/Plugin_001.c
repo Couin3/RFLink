@@ -535,6 +535,37 @@ boolean Plugin_001(byte function, char *string)
    }
    #endif
 
+   #ifdef PLUGIN_065
+   // ==========================================================================
+   // Beginning of Signal translation for generic 24-bit keyfobs with length of
+   // the bit is 640us (two pulses per bit + one closing)
+   // ==========================================================================
+   if (RawSignal.Number == RAW_BUFFER_SIZE - 1)
+   {
+      int start = 0; 
+      for (start = 52; start > 0; start--) {
+         if (RawSignal.Pulses[start] > PULSE4000) {
+            start++; //skip the first long delay
+            int end = start + 48 + 1; //48 is actual data
+            if (RawSignal.Pulses[end] < PULSE4000) break; // exit if no second delay
+            for (int i = start; i < end; i += 2) { //validate pulse periods
+               if (RawSignal.Pulses[i] + RawSignal.Pulses[i] > 700) {
+                  goto exit_065;
+               }
+            }
+            for (int i = 0; i < 48; i++) {
+               RawSignal.Pulses[1 + i] = RawSignal.Pulses[start + i]; // reorder pulse array
+            }
+            RawSignal.Number = 48;
+            RawSignal.Pulses[0] = 65;
+            return false;
+         }
+      }
+      exit_065:;
+   }
+   // ==========================================================================
+   #endif
+
    #if (defined(PLUGIN_046) ||  defined(PLUGIN_064))
    // ==========================================================================
    // Beginning of Signal translation for Atlantic/Visonic alarm detectors
@@ -777,6 +808,7 @@ Plugin  Pulselength
 048     126-290
 060     26
 061     50
+065     49
 070     36
 071     66
 072     26

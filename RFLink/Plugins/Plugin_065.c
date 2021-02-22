@@ -1,10 +1,9 @@
 //#######################################################################################################
 //##                    This Plugin is only for use with the RFLink software package                   ##
-//##                                     Plugin-062: Chuango AlarmSensors                              ##
+//##                                     Plugin-065: 640us-based keyfobs                               ##
 //#######################################################################################################
 /*********************************************************************************************\
- * This protocol provides support for Chuango Alarm sensors (Motion detectors and door/window contacts)
- * Note that these modules are reported as X10 switches to the Home Automation software so that they work correctly 
+ * This protocol provides support for basic keyfobs, used in garage openers
  *
  * Author  (present)  : StormTeam 2018..2020 - Marc RIVES (aka Couin3)
  * Support (present)  : https://github.com/couin3/RFLink 
@@ -14,7 +13,7 @@
  *                      Usage of any parts of this code in a commercial application is prohibited!
  *********************************************************************************************
  * Technical data:
- * Devices send 48 pulses, 24 bits. However RFLink 
+ * Devices send 48 pulses, 24 bits total.
  *
  * Sample:
  * 20;XX;DEBUG;Pulses=49;Pulses(uSec)=192,448,160,480,480,160,480,160,448,192,128,512,128,544,96,544,448,192,128,512,160,512,480,160,128,512,480,160,480,192,128,512,480,160,480,160,128,512,448,192,128,512,128,512,128,512,448,192,96;
@@ -34,27 +33,15 @@
 #include "../4_Display.h"
 
 boolean Plugin_065(byte function, char *string) {
-   if (RawSignal.Number < GARAGE640_PULSECOUNT+10)
+   if (RawSignal.Number != GARAGE640_PULSECOUNT || RawSignal.Pulses[0] != 65)
       return false;
 
-   int start = 2; 
-   for (; start < GARAGE640_PULSECOUNT + 10; start++) {
-      if (RawSignal.Pulses[start] > PULSE4000) {
-         //first long delay found
-         start++;
-         break;
-      }
-   }
-   int end = start + GARAGE640_PULSECOUNT;
-   if (RawSignal.Pulses[start - 1] < PULSE4000 || RawSignal.Pulses[end + 1] < PULSE4000) {
-      return false;
-   }
 
    unsigned long bitstream = 0L;
    //==================================================================================
    // Get all 24 bits
    //==================================================================================
-   for (byte x = start; x < end; x += 2)
+   for (byte x = 1; x < GARAGE640_PULSECOUNT; x += 2)
    {
       if (RawSignal.Pulses[x] > GARAGE640_PULSEMID)
       {
