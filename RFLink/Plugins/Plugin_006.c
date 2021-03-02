@@ -42,6 +42,7 @@
 
 #ifdef PLUGIN_006
 #include "../4_Display.h"
+#include "../1_Radio.h"
 
 boolean Plugin_006(byte function, char *string)
 {
