@@ -357,9 +357,9 @@ char *ptr;
 const char c_delim[2] = ";";
 char c_label[12];
 
-void retrieve_Init()
+void retrieve_Init(char* inputBuffer)
 {
-  ptr = strtok(InputBuffer_Serial, c_delim);
+  ptr = strtok(inputBuffer, c_delim);
 }
 
 boolean retrieve_Name(const char *c_Name)

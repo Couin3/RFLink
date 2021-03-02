@@ -83,7 +83,7 @@ void display_METER(unsigned int);
 void display_VOLT(unsigned int);
 void display_RGBW(unsigned int);
 
-void retrieve_Init();
+void retrieve_Init(char* inputBuffer);  // inputBuffer WILL be modified
 boolean retrieve_Name(const char *);
 boolean retrieve_ID(unsigned long &);
 boolean retrieve_Switch(byte &);
