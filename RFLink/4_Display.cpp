@@ -353,13 +353,15 @@ void display_CHAN(byte channel)
 // get label shared func //
 // --------------------- //
 
+char retrieveBuffer[INPUT_COMMAND_SIZE];
 char *ptr;
 const char c_delim[2] = ";";
 char c_label[12];
 
-void retrieve_Init(char* inputBuffer)
+void retrieve_Init()
 {
-  ptr = strtok(inputBuffer, c_delim);
+  memcpy(retrieveBuffer, InputBuffer_Serial, INPUT_COMMAND_SIZE);
+  ptr = strtok(retrieveBuffer, c_delim);
 }
 
 boolean retrieve_Name(const char *c_Name)

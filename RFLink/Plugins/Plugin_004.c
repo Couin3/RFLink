@@ -172,9 +172,7 @@ boolean PluginTX_004(byte function, char *string)
    byte Cmd_bitstream = 0;          // 2 bits Command
    byte Cmd_dimmer = 0;             // 4 bits Alt Command
 
-   char inputBuffer[INPUT_COMMAND_SIZE];
-   memcpy(inputBuffer, InputBuffer_Serial, INPUT_COMMAND_SIZE);
-   retrieve_Init(inputBuffer);
+   retrieve_Init();
 
    if (!retrieve_Name("10"))
       return false;
