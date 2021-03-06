@@ -427,9 +427,6 @@ boolean retrieve_Switch(byte &b_Switch)
     strcpy(c_Switch, ptr);
 
     b_Switch = (byte)strtoul(c_Switch, NULL, HEX);
-    b_Switch--; // 1 to 16 -> 0 to 15 (displayed value is one more)
-    if (b_Switch > 0xF)
-      return false; // invalid address
 
     ptr = strtok(NULL, c_delim);
     return true;
