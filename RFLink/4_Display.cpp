@@ -438,6 +438,36 @@ boolean retrieve_Switch(byte &b_Switch)
     return false;
 }
 
+boolean retrieve_Command(byte &b_Cmd)
+{
+  // Command
+  char c_Cmd[10];
+
+  if (ptr != NULL)
+  {
+    strcpy(c_label, "CMD=");
+    if (strncasecmp(ptr, c_label, strlen(c_label)) == 0)
+      ptr += strlen(c_label);
+
+    if (strlen(ptr) > 7)
+      return false;
+
+    for (byte i = 0; i < strlen(ptr); i++)
+      if (!isalnum(ptr[i]))
+        return false;
+
+    strcpy(c_Cmd, ptr);
+
+    b_Cmd = str2cmd(c_Cmd); // Get ON/OFF etc. command
+    ptr = strtok(NULL, c_delim);
+    return (b_Cmd != false);
+  }
+  else
+  {
+    return false;
+  }
+}
+
 boolean retrieve_Command(byte &b_Cmd, byte &b_Cmd2)
 {
   // Command
