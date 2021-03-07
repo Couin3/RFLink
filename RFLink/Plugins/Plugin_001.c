@@ -749,7 +749,7 @@ boolean Plugin_001(byte function, char *string)
             if (j + 26 > RAW_BUFFER_SIZE - 1)
                break; // cant be the packet we look for
             //if ( (RawSignal.Pulses[j+26]*RawSignal.Multiply > 2500) && (RawSignal.Pulses[j+26]*RawSignal.Multiply < 3000) && (RawSignal.Pulses[j+26+26]*RawSignal.Multiply > 2500) ) { // first long delay found, make sure we have another at the right position
-            if ((RawSignal.Pulses[j + 26] > PULSE2500) && (RawSignal.Pulses[j + 26] < PULSE3000) && (RawSignal.Pulses[j + 26 + 26] > PULSE2500))
+            if ((RawSignal.Pulses[j + 26] > PULSE2500) && (RawSignal.Pulses[j + 26 + 26] > PULSE2500))
             { // first long delay found, make sure we have another at the right position
                for (i = 0; i < 26; i++)
                {
