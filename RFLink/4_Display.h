@@ -87,6 +87,7 @@ void retrieve_Init();
 boolean retrieve_Name(const char *);
 boolean retrieve_ID(unsigned long &);
 boolean retrieve_Switch(byte &);
+boolean retrieve_Command(byte &);
 boolean retrieve_Command(byte &, byte &);
 boolean retrieve_End();
 
