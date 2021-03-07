@@ -104,22 +104,22 @@
 // #define PLUGIN_TX_008           // Kambrook
 // #define PLUGIN_TX_009           // X10 RF
 // #define PLUGIN_TX_010		   // TRC02 RGB switch
-// #define PLUGIN_TX_011           // Home Confort
+// Cannot activate, uses DEPRECATED RawSendRF  #define PLUGIN_TX_011           // Home Confort
 // #define PLUGIN_TX_012           // Flamingo FA500R  (11)
-// #define PLUGIN_TX_013           // Powerfix/Quigg
+// Cannot activate, uses DEPRECATED RawSendRF  #define PLUGIN_TX_013           // Powerfix/Quigg
 // #define PLUGIN_TX_015           // Home Easy EU     (14)
 // -------------------
 // Doorbells
 // -------------------
 // #define PLUGIN_TX_070           // Select Plus (Action - Quhwa)
-// #define PLUGIN_TX_072           // Byron SX doorbell
+// Cannot activate, uses DEPRECATED RawSendRF  #define PLUGIN_TX_072           // Byron SX doorbell
 // #define PLUGIN_TX_073           // Deltronic doorbell
 // #define PLUGIN_TX_074           // RL02
 // -------------------
 // Smoke detectors
 // -------------------
-// #define PLUGIN_TX_080           // Flamingo FA20 / KD101 smoke detector
-// #define PLUGIN_TX_082           // Mertik Maxitrol / Dru fireplace
+// Cannot activate, uses DEPRECATED RawSendRF  #define PLUGIN_TX_080           // Flamingo FA20 / KD101 smoke detector
+// Cannot activate, uses DEPRECATED RawSendRF  #define PLUGIN_TX_082           // Mertik Maxitrol / Dru fireplace
 // -------------------
 //       -=#=-
 // -------------------
