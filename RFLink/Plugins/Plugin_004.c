@@ -187,6 +187,10 @@ boolean PluginTX_004(byte function, char *string)
    if (!retrieve_End())
       return false;
 
+    Switch_bitstream--; // 1 to 16 -> 0 to 15 (displayed value is one more)
+    if (Switch_bitstream > 0xF)
+      return false; // invalid address
+
    // --------------- Prepare bitstream ------------
    // Dimming of groups is also possible but not supported yet!
    // when level=0 is it better to transmit just the off command ?
