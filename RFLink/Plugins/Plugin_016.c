@@ -9,7 +9,7 @@
 //#define PLUGIN_016_DEBUG
 
 const int SLVCR_BitCount = 24;
-const int8 SLVCR_CodeCount = 8;
+const int8_t SLVCR_CodeCount = 8;
 const uint16_t SLVCR_OnCodes[SLVCR_CodeCount] =  {0xf756, 0x7441, 0xd9c5, 0xe3aa, 0x6af3, 0x453f, 0x0f6e, 0xc170};
 const uint16_t SLVCR_OffCodes[SLVCR_CodeCount] = {0x20e7, 0x5212, 0x9d88, 0x8c0b, 0x16bc, 0x3b99, 0xb8dd, 0xae24};
 
@@ -41,11 +41,11 @@ boolean Plugin_016(byte function, char *string)
       {
          // found start pulse followed by at least 24 bits (2 pulses per bit)
          pulseIndex++;
-         uint32 packet = 0;
-         for(int8 bitIndex = SLVCR_BitCount - 1; bitIndex >= 0; bitIndex--)
+         uint32_t packet = 0;
+         for(int8_t bitIndex = SLVCR_BitCount - 1; bitIndex >= 0; bitIndex--)
          {
             int bitDuration = RawSignal.Pulses[pulseIndex];
-            uint32 bitMask = (1 << bitIndex);
+            uint32_t bitMask = (1 << bitIndex);
             if (bitDuration < SLVCR_ShortPulseMaxDuration)
             {
                packet &= ~bitMask;
@@ -217,7 +217,7 @@ boolean PluginTX_016(byte function, char *string)
 
       // Send bits
       int bitMask = 1 << (SLVCR_BitCount - 1);
-      for(int8 bitIndex = 0; bitIndex < SLVCR_BitCount; bitIndex++)
+      for(int8_t bitIndex = 0; bitIndex < SLVCR_BitCount; bitIndex++)
       {
          int HighTime = ZeroBitHighTime;
          int LowTime = ZeroBitLowTime;
