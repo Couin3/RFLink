@@ -88,7 +88,7 @@ boolean Plugin_016(byte function, char *string)
          }
 
          // Try to find the command bits inside our truth table
-         int16_t commandBits = (packet >> 4) & 0xFFFF;
+         uint16_t commandBits = (packet >> 4) & 0xFFFF;
          enum CMD_OnOff command = CMD_Unknown;
          byte commandCodeIndex = 0;
          while (commandCodeIndex < SLVCR_CodeCount && command == CMD_Unknown)
