@@ -33,6 +33,7 @@
 #define PLUGIN_013 // Powerfix/Quigg
 #define PLUGIN_014 // Ikea Koppla
 #define PLUGIN_015 // Home Easy EU
+#define PLUGIN_016 // Silvercrest 433MHz power sockets
 // -------------------
 // Weather sensors
 // -------------------
@@ -108,6 +109,7 @@
 // #define PLUGIN_TX_012           // Flamingo FA500R  (11)
 // #define PLUGIN_TX_013           // Powerfix/Quigg
 // #define PLUGIN_TX_015           // Home Easy EU     (14)
+#define PLUGIN_TX_016            // Silvercrest
 // -------------------
 // Doorbells
 // -------------------
