@@ -61,6 +61,7 @@
 #define PLUGIN_062 // Chuango Alarm Devices
 #define PLUGIN_063 // Oregon PIR/ALARM/LIGHT
 #define PLUGIN_064 // Atlantic (and Visonic)
+#define PLUGIN_065 // custom garage doors
 // -------------------
 // Doorbells
 // -------------------
