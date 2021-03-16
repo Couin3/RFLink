@@ -405,7 +405,7 @@ boolean retrieve_ID(unsigned long &ul_ID)
     return true;
   }
   else
-    return false;
+  return false;
 }
 
 boolean retrieve_Switch(byte &b_Switch)
@@ -433,11 +433,11 @@ boolean retrieve_Switch(byte &b_Switch)
     if (b_Switch > 0xF)
       return false; // invalid address
 
-    ptr = strtok(NULL, c_delim);
+        ptr = strtok(NULL, c_delim);
     return true;
   }
   else
-    return false;
+  return false;
 }
 
 boolean retrieve_Command(byte &b_Cmd, byte &b_Cmd2)
@@ -512,7 +512,7 @@ boolean retrieve_End()
 /*********************************************************************************************\
    Convert string to command code
 \*********************************************************************************************/
-int str2cmd(char *command)
+int str2cmd(const char *command)
 {
   if (strcasecmp(command, "ON") == 0)
     return VALUE_ON;
