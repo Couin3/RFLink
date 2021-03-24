@@ -434,7 +434,7 @@ boolean retrieve_word(uint16_t &value, const char* prefix)
     unsigned long retrievedValue;
     bool result = retrieve_hexNumber(retrievedValue, 4, prefix);
     if (result)
-        value = (byte)retrievedValue;
+        value = (uint16_t)retrievedValue;
     return result;
 }
 
