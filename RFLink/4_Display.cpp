@@ -381,7 +381,7 @@ boolean retrieve_hexNumber(unsigned long &value, byte maxNibbles, const char* pr
 {
   if (ptr != NULL)
   {
-    if (strncasecmp(ptr, prefix, strlen(prefix)) == 0)
+    if ((prefix != NULL) && (strncasecmp(ptr, prefix, strlen(prefix)) == 0))
       ptr += strlen(prefix);
 
     if (strlen(ptr) > maxNibbles)
@@ -404,7 +404,7 @@ boolean retrieve_Command(byte &value, const char* prefix)
 {
   if (ptr != NULL)
   {
-    if (strncasecmp(ptr, prefix, strlen(prefix)) == 0)
+    if ((prefix != NULL) && (strncasecmp(ptr, prefix, strlen(prefix)) == 0))
       ptr += strlen(prefix);
 
     if (strlen(ptr) > 7)
