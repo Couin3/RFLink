@@ -7,6 +7,7 @@
 
 #include <Arduino.h>
 #include "RFLink.h"
+#include "2_Signal.h"
 #include "3_Serial.h"
 #include "4_Display.h"
 
@@ -361,6 +362,23 @@ void display_DEBUG(byte data[], unsigned int size)
   }
 
   strcat(pbuffer, buffer);
+}
+
+void debugRawSignal(RawSignalStruct RawSignal, int size) 
+{
+   char dbuffer[64];
+
+   sprintf_P(dbuffer, PSTR("Pulses %04d Multiply %04d: "), 
+            RawSignal.Number, RawSignal.Multiply, RawSignal.Time);
+   Serial.print(dbuffer);
+
+   for (int i=0; i<size; i++) 
+   {
+      sprintf_P(dbuffer, PSTR("%d "), RawSignal.Pulses[i]*RawSignal.Multiply);
+      Serial.print(dbuffer);
+   }
+
+   Serial.println();
 }
 
 // Channel
