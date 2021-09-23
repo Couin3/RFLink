@@ -23,6 +23,7 @@ void display_IDn(unsigned long, byte);
 void display_IDc(const char *);
 void display_SWITCH(byte);
 void display_SWITCHc(const char *);
+void display_CHAN(byte);
 enum CMD_Group
 {
     CMD_Single,
@@ -52,6 +53,7 @@ void display_UV(unsigned int);
 void display_LUX(unsigned int);
 void display_BAT(boolean);
 void display_RAIN(unsigned int);
+void display_RAINTOT(unsigned int);
 void display_RAINRATE(unsigned int);
 void display_WINSP(unsigned int);
 void display_AWINSP(unsigned int);
@@ -81,6 +83,8 @@ void display_DIST(unsigned int);
 void display_METER(unsigned int);
 void display_VOLT(unsigned int);
 void display_RGBW(unsigned int);
+
+void display_DEBUG(byte data[], unsigned int size);
 
 void retrieve_Init();
 boolean retrieve_Name(const char *);

@@ -49,36 +49,6 @@ boolean CheckMQTT(byte *byte_in)
   return false;
 }
 
-#ifdef AUTOCONNECT_ENABLED
-boolean CheckWeb(String &String_in)
-{
-  if (!String_in.isEmpty())
-  {
-    String_in.trim();
-    char char_in[INPUT_COMMAND_SIZE];
-    String_in.toCharArray(char_in, String_in.length() + 1);
-    char_in[String_in.length() + 1] = 0;
-
-    if (CopySerial(char_in))
-    {
-#ifdef SERIAL_ENABLED
-      Serial.flush();
-      Serial.print(F("Message arrived [Web] "));
-      Serial.println(InputBuffer_Serial);
-#endif
-      if (CheckCmd())
-      {
-        String_in.clear();
-        return true;
-      }
-    }
-    String_in.clear();
-    return false;
-  }
-  return false;
-}
-#endif // AUTOCONNECT_ENABLED
-
 boolean CopySerial(char *src)
 {
   return (strncpy(InputBuffer_Serial, src, INPUT_COMMAND_SIZE - 2));
@@ -133,13 +103,13 @@ boolean CheckCmd()
       // -------------------------------------------------------
       // Handle Device Management Commands
       // -------------------------------------------------------
-      if (strcasecmp(InputBuffer_Serial + 3, "PING;") == 0)
+      if (strncasecmp(InputBuffer_Serial + 3, "PING;",5) == 0)
       {
         display_Header();
         display_Name(PSTR("PONG"));
         display_Footer();
       }
-      else if (strcasecmp(InputBuffer_Serial + 3, "REBOOT;") == 0)
+      else if (strncasecmp(InputBuffer_Serial + 3, "REBOOT;",7) == 0)
       {
         display_Header();
         display_Name(PSTR("REBOOT"));

@@ -331,6 +331,45 @@ boolean Plugin_001(byte function, char *string)
    // ==========================================================================
    #endif
 
+   #ifdef PLUGIN_037
+   // ==========================================================================
+   // Beginning of Signal translation for AcuRite 986 Sensors
+   // ==========================================================================
+   // Serial.print("RawSignal.Number: ");
+   // Serial.println(RawSignal.Number);  
+   if (RawSignal.Number > 160 && RawSignal.Number < 190)
+   {
+      for (j = 2; j < 43; j++)
+      { // Only check the total RF packet length we are looking for
+         //if (RawSignal.Pulses[j]*RawSignal.Multiply > 2500) {  // input is going to fast skip to where new part is going to start
+         if (RawSignal.Pulses[j] < PULSE1100)
+         { // input is going to fast skip to where new part is going to start
+            if (j + 84 > RAW_BUFFER_SIZE - 1)
+               break; // cant be the packet we look for
+            //if ( (RawSignal.Pulses[j+26]*RawSignal.Multiply > 2500) && (RawSignal.Pulses[j+26]*RawSignal.Multiply < 3000) && (RawSignal.Pulses[j+26+26]*RawSignal.Multiply > 2500) ) { // first long delay found, make sure we have another at the right position
+            if ((RawSignal.Pulses[j + 84] > PULSE1100))
+            { // first long delay found, make sure we have another at the right position
+               if (j != 42)
+               {
+                  // Serial.print("RawSignal.Pulses: ");
+                  for (i = 0; i < 84; i++)
+                  {
+                     // Serial.print(RawSignal.Pulses[j + 1 + i]);
+                     // Serial.print(", ");
+                     RawSignal.Pulses[1 + i] = RawSignal.Pulses[j + 1 + i]; // reorder pulse array
+                  }
+                  // Serial.println("");
+               }
+               RawSignal.Number = 84;    // New packet length
+               RawSignal.Pulses[0] = 37; // signal the plugin number that should process this packet
+               return false;             // Conversion done, stop plugin 1 and continue with regular plugins
+            }
+         }
+      }
+   }
+  // ==========================================================================
+  #endif
+
    // ==========================================================================
    // END plugin 001 if the incoming packet is not oversized and resume normal processing of plugins
    // there is no need to do all the checks if there never will be a match
@@ -494,6 +533,37 @@ boolean Plugin_001(byte function, char *string)
          }
       }
    }
+   #endif
+
+   #ifdef PLUGIN_065
+   // ==========================================================================
+   // Beginning of Signal translation for generic 24-bit keyfobs with length of
+   // the bit is 640us (two pulses per bit + one closing)
+   // ==========================================================================
+   if (RawSignal.Number == RAW_BUFFER_SIZE - 1)
+   {
+      int start = 0; 
+      for (start = 52; start > 0; start--) {
+         if (RawSignal.Pulses[start] > PULSE4000) {
+            start++; //skip the first long delay
+            int end = start + 48 + 1; //48 is actual data
+            if (RawSignal.Pulses[end] < PULSE4000) break; // exit if no second delay
+            for (int i = start; i < end; i += 2) { //validate pulse periods
+               if (RawSignal.Pulses[i] + RawSignal.Pulses[i] > 700) {
+                  goto exit_065;
+               }
+            }
+            for (int i = 0; i < 48; i++) {
+               RawSignal.Pulses[1 + i] = RawSignal.Pulses[start + i]; // reorder pulse array
+            }
+            RawSignal.Number = 48;
+            RawSignal.Pulses[0] = 65;
+            return false;
+         }
+      }
+      exit_065:;
+   }
+   // ==========================================================================
    #endif
 
    #if (defined(PLUGIN_046) ||  defined(PLUGIN_064))
@@ -738,6 +808,7 @@ Plugin  Pulselength
 048     126-290
 060     26
 061     50
+065     49
 070     36
 071     66
 072     26
