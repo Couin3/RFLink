@@ -219,23 +219,6 @@ void addHighLowSignalPulses(unsigned long high, unsigned long low,
    }
 }
 
-void debugRawSignal(int size) 
-{
-   char dbuffer[64];
-
-   sprintf_P(dbuffer, PSTR("Pulses %04d Multiply %04d: "), 
-            RawSignal.Number, RawSignal.Multiply, RawSignal.Time);
-   Serial.print(dbuffer);
-
-   for (int i=0; i<size; i++) 
-   {
-      sprintf_P(dbuffer, PSTR("%d "), RawSignal.Pulses[i]*RawSignal.Multiply);
-      Serial.print(dbuffer);
-   }
-
-   Serial.println();
-}
-
 void sendRF(int currentPulses) 
 {
    noInterrupts();

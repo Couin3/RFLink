@@ -53,6 +53,7 @@
 #define PLUGIN_045 // Auriol
 #define PLUGIN_046 // Auriol v2 / Xiron
 #define PLUGIN_047 // Auriol v4
+#define PLUGIN_048 // Oregon V1/2/3
 // -------------------
 // Motion Sensors, include when needed
 // -------------------
@@ -77,6 +78,8 @@
 #define PLUGIN_080 // Flamingo FA20 / KD101 smoke detector
 #define PLUGIN_081 // Mertik Maxitrol / Dru fireplace
 #define PLUGIN_082 // Mertik Maxitrol / Dru fireplace
+#define PLUGIN_083 // BrelMotor
+
 // -------------------
 // Misc
 // -------------------
@@ -120,6 +123,7 @@
 // -------------------
 // #define PLUGIN_TX_080           // Flamingo FA20 / KD101 smoke detector
 // #define PLUGIN_TX_082           // Mertik Maxitrol / Dru fireplace
+#define PLUGIN_TX_083           // BrelMotor
 // -------------------
 //       -=#=-
 // -------------------

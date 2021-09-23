@@ -42,7 +42,6 @@
 #ifdef PLUGIN_048
 #include "../4_Display.h"
 
-void debugRawSignal(int size);
 /*
  * Many devices use 160 bits, known exceptions:
  * 0xEA4c         136 bits  // TH132N
@@ -1037,23 +1036,6 @@ boolean Plugin_048(byte function, char *string)
    RawSignal.Repeats = true; // suppress repeats of the same RF packet
    RawSignal.Number = 0;
    return true;
-}
-
-void debugRawSignal(int size) 
-{
-   char dbuffer[64];
-
-   sprintf_P(dbuffer, PSTR("Pulses %04d Multiply %04d: "), 
-            RawSignal.Number, RawSignal.Multiply, RawSignal.Time);
-   Serial.print(dbuffer);
-
-   for (int i=0; i<size; i++) 
-   {
-      sprintf_P(dbuffer, PSTR("%d "), RawSignal.Pulses[i]*RawSignal.Multiply);
-      Serial.print(dbuffer);
-   }
-
-   Serial.println();
 }
 
 #endif // PLUGIN_048
