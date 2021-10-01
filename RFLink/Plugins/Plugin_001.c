@@ -233,8 +233,9 @@ boolean Plugin_001(byte function, char *string)
       }
       Serial.print(F(";\r\n"));
       // ----------------------------------
-      RawSignal.Number = 0; // Last plugin, kill packet
-      return true;          // stop processing
+      // RawSignal.Number = 0; // Last plugin, kill packet
+      pbuffer[0] = 0;         // Reinit serial buffer
+      return false;          // stop processing
    }
    
    #ifdef PLUGIN_061
