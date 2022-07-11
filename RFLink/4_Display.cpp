@@ -20,7 +20,7 @@ char pbuffer[PRINT_BUFFER_SIZE]; // Buffer for complete message data
 // ------------------- //
 
 #if (defined(__AVR_ATmega328P__) || defined(__AVR_ATmega2560__))
-#error "For AVR plaforms, in all sprintf_P above, please replace %s with %S"
+#error "For AVR plaforms, in all sprintf_P above, please replace %s with %s"
 #endif
 
 // Common Header
@@ -388,6 +388,12 @@ void display_CHAN(byte channel)
   strcat(pbuffer, dbuffer);
 }
 
+// Add whatever you want to buffer
+// for ECHO purpose
+void display_BUFFER(const char *input) {
+  strcat(pbuffer, input);
+}
+
 // --------------------- //
 // get label shared func //
 // --------------------- //
@@ -708,3 +714,23 @@ String GPIO2String(uint8_t uGPIO)
     return "NOT_A_PIN";
 }
 #endif // ESP32
+
+/**
+ * @see https://stackoverflow.com/questions/111928/is-there-a-printf-converter-to-print-in-binary-format
+ * Assumes little endian
+ */
+void printBits(size_t const size, void const * const ptr)
+{
+    unsigned char *b = (unsigned char*) ptr;
+    unsigned char byte;
+    int i, j;
+    char dbuffer[2];
+
+    for (i = size-1; i >= 0; i--) {
+        for (j = 7; j >= 0; j--) {
+            byte = (b[i] >> j) & 1;
+            Serial.print(byte);
+        }
+    }
+    Serial.println();
+}
