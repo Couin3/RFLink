@@ -22,6 +22,15 @@
  * 20;03;DEBUG;Pulses=50;Pulses(uSec)=1620,420,1530,450,1560,390,510,1440,1560,420,1530,420,450,1530,1440,510,1440,540,360,1500,450,1470,480,1470,1560,390,510,1440,1530,420,1500,480,1470,570,330,1590,390,1530,450,1500,480,1470,1530,420,1530,420,1530,420,450,3360;
  * 101010011010011010010101100110101001010101101010 0
  * 00010010 01110100 01111000   = 0x 12 74 78
+ * 
+ * Precision for Two-way Magnetic Sensor Wireless Door Window Open Close Detector Contact Alarm System For GSM Home Security
+ * https://www.aliexpress.com/item/32974739380.html
+ * 
+ * 011110100000000001111010 => OPEN
+ * 011110100000000001111000 => CLOSE
+ * 123456789012345678901234
+ * bit 23 = OPEN / CLOSE
+ * 
  \*********************************************************************************************/
 #define ALARMPIRV2_PLUGIN_ID 062
 #define PLUGIN_DESC_062 "Chuango"
@@ -88,9 +97,10 @@ boolean Plugin_062(byte function, char *string)
    // ----------------------------------
    display_Header();
    display_Name(PSTR("Chuango"));
-   display_IDn((bitstream & 0xFFFFFF), 6); // "%S%06lx"
+   display_IDn((bitstream & 0xFFFFF0), 6); // "%S%06lx"
    display_SWITCH(2);
-   display_CMD(CMD_Single, CMD_On); // #ALL #ON
+   boolean open = (bitstream >> 2) & 0x01;
+   display_CMD(CMD_Single, open ? CMD_On : CMD_Off); // #ALL #ON
    display_Footer();
 
    //==================================================================================
