@@ -302,6 +302,12 @@ boolean PluginTX_083(byte function, char *string)
       char * subaddress = strings[3];
       char * commandstring = strings[4];
 
+      // Keep only 6 DIGITS
+      int nbToCut = strlen(address)-6;
+      if ( nbToCut > 0 ) {
+         address+=nbToCut;
+      }
+
 #ifdef PLUGIN_083_DEBUG
       sprintf_P(dbuffer, PSTR("Send BrelMotor %s %s"), address, subaddress);
       Serial.println(dbuffer);
@@ -339,7 +345,15 @@ boolean PluginTX_083(byte function, char *string)
       addSinglePulse(DOOYA_RFSTART_1, &currentPulses);
       // add Body
       addHighLowSignalPulses(DOOYA_RFHIGH, DOOYA_RFLOW, address, &currentPulses);
-      addHighLowSignalPulses(DOOYA_RFHIGH, DOOYA_RFLOW, subaddress, &currentPulses);
+
+      // Pad subaddress on 2 DIGITS ZERO PADD
+      char buffersubaddress[3];
+      sprintf_P(buffersubaddress, PSTR("%2s"), subaddress);
+      if (buffersubaddress[0] == ' ') {
+         buffersubaddress[0]='0';
+      }
+      addHighLowSignalPulses(DOOYA_RFHIGH, DOOYA_RFLOW, buffersubaddress, &currentPulses);
+
       char buffercommand[3];
       sprintf_P(buffercommand, PSTR("%2x"), command);
       addHighLowSignalPulses(DOOYA_RFHIGH, DOOYA_RFLOW, buffercommand, &currentPulses);
@@ -349,7 +363,7 @@ boolean PluginTX_083(byte function, char *string)
 
       RawSignal.Number = currentPulses;
 #ifdef PLUGIN_083_DEBUG
-      debugRawSignal(currentPulses);
+//      debugRawSignal(RawSignal, currentPulses);
 #endif
 
       // Amplify signal length from 32 (receipt) to 42 (emission)
