@@ -11,11 +11,11 @@
 #include "RFLink.h"
 
 // local AP
-String WIFI_SSID = "xxx";
-String WIFI_PSWD = "xxx";
+String WIFI_SSID = "happy_and";
+String WIFI_PSWD = "alamakotaakotmaale";
 
 // DHCP or Static IP
-// #define USE_DHCP
+#define USE_DHCP
 #ifndef USE_DHCP
 String WIFI_IP = "192.168.1.xxx";
 String WIFI_DNS = "192.168.1.xxx";
