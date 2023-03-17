@@ -85,7 +85,7 @@ void start_WIFI()
   Serial.print(F("WiFi RSSI :\t\t"));
   Serial.println(WiFi.RSSI());
 
-  /*
+  
   ArduinoOTA.onStart([]() {
     String type;
     if (ArduinoOTA.getCommand() == U_FLASH)
@@ -116,7 +116,7 @@ void start_WIFI()
       Serial.println("End Failed");
   });
   ArduinoOTA.begin();
-  */
+  
 }
 
 void stop_WIFI()
