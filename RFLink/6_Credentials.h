@@ -31,9 +31,9 @@ String MQTT_USER = "mqtt";
 String MQTT_PSWD = "mqtt";
 
 // MQTT Topic
-String MQTT_TOPIC_OUT = "/ESP00/msg";
-String MQTT_TOPIC_IN = "/ESP00/cmd";
-String MQTT_TOPIC_LWT = "/ESP00/lwt";
+String MQTT_TOPIC_OUT = "RF_LINK/ESP00/msg";
+String MQTT_TOPIC_IN = "RF_LINK/ESP00/cmd";
+String MQTT_TOPIC_LWT = "RF_LINK/ESP00/lwt";
 
 #ifdef CHECK_CACERT
 static const char ca_cert[] PROGMEM = R"EOF(
