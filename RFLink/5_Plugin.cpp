@@ -29,7 +29,11 @@ boolean QRFUDebug = QRFUDebug_0; // debug RF signals with plugin 254 but no mult
 /**********************************************************************************************\
  * Load plugins
 \*********************************************************************************************/
+#ifdef ARDUINO_AVR_UNO
+#include "./Plugins/_Plugin_Config_01_uno.h"
+#else
 #include "./Plugins/_Plugin_Config_01.h"
+#endif
 
 #ifdef PLUGIN_001
 #include "./Plugins/Plugin_001.c"
@@ -365,6 +369,7 @@ boolean QRFUDebug = QRFUDebug_0; // debug RF signals with plugin 254 but no mult
 #endif
 
 #ifdef PLUGIN_084
+//#define PLUGIN_084_DEBUG
 #include "./Plugins/Plugin_084.c"
 #endif
 
