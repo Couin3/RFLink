@@ -10,8 +10,8 @@
 
 #include <Arduino.h>
 
-#define PLUGIN_MAX 84    // Maximum number of Receive plugins
-#define PLUGIN_TX_MAX 84 // Maximum number of Transmit plugins
+#define PLUGIN_MAX 85    // Maximum number of Receive plugins
+#define PLUGIN_TX_MAX 85 // Maximum number of Transmit plugins
 
 enum PState
 {

@@ -216,7 +216,30 @@ boolean CheckCmd()
 
         set_Radio_mode(Radio_RX);
       }
+    } 
+    // DOMOTICZ / RFLINK ECHO COMMAND
+    // Device creation using the Echo command (Node 11):
+    // https://www.rflink.nl/protref.php
+    else if ( strncmp(InputBuffer_Serial, "11;", 3) == 0 
+      && strlen(InputBuffer_Serial) > 9 ) {
+      // 11;20;0B;NewKaku;ID=000005;SWITCH=2;CMD=ON; => 11; is the required node info it can be followed by any custom data which will be echoed
+      //
+      // RFlink will reply with
+      // 20;D3;OK; => Notifying that the command has been received
+      // 20;D4;NewKaku;ID=000005;SWITCH=2;CMD=ON; => sending the data "as if" a remote control button was pressed.
+
+      // Acknowledge
+      display_Header();
+      display_Name(PSTR("OK"));
+      display_Footer();
+
+      // Cut input string but keep semi colon
+      strcpy(InputBuffer_Serial, InputBuffer_Serial+8);
+      display_Header();
+      display_BUFFER(InputBuffer_Serial);
+      display_Footer();
     }
+
   } // if > 7
   if (ValidCommand != 0)
   {

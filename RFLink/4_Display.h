@@ -9,6 +9,7 @@
 #define Misc_h
 
 #include <Arduino.h>
+#include <2_Signal.h>
 
 #define PRINT_BUFFER_SIZE 90 // 90         // Maximum number of characters that a command should print in one go via the print buffer.
 
@@ -53,6 +54,7 @@ void display_UV(unsigned int);
 void display_LUX(unsigned int);
 void display_BAT(boolean);
 void display_RAIN(unsigned int);
+void display_RAINTOT(unsigned int);
 void display_RAINRATE(unsigned int);
 void display_WINSP(unsigned int);
 void display_AWINSP(unsigned int);
@@ -83,6 +85,10 @@ void display_METER(unsigned int);
 void display_VOLT(unsigned int);
 void display_RGBW(unsigned int);
 
+void display_DEBUG(byte data[], unsigned int size);
+
+void display_BUFFER(const char *input);
+
 void retrieve_Init();
 boolean retrieve_Name(const char *);
 boolean retrieve_ID(unsigned long &);
@@ -112,3 +118,6 @@ String GPIO2String(uint8_t uGPIO);
 #endif // ESP8266 || ESP32
 
 #endif
+
+void printBits(size_t const size, void const * const ptr);
+void debugRawSignal(RawSignalStruct RawSignal, int size);

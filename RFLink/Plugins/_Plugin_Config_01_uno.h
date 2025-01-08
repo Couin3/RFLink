@@ -19,65 +19,65 @@
 // ------------------------------------------------------------------------
 // -- Any of the following protocols can be excluded whenever not needed --
 // ------------------------------------------------------------------------
-#define PLUGIN_002 // Lacrosse v2 2300/3600
-#define PLUGIN_003 // Kaku : Klik-Aan-Klik-Uit (with code wheel) aka ARC
-#define PLUGIN_004 // NewKAKU : Klik-Aan-Klik-Uit with automatic coding aka Intertechno.
-#define PLUGIN_005 // Eurodomest
-#define PLUGIN_006 // Blyss
-#define PLUGIN_007 // Conrad RSL2
-#define PLUGIN_008 // Kambrook
-#define PLUGIN_009 // X10 RF
-#define PLUGIN_010 // TRC02 RGB Switch
-#define PLUGIN_011 // Home Confort
-#define PLUGIN_012 // Flamingo FA500R
-#define PLUGIN_013 // Powerfix/Quigg
-#define PLUGIN_014 // Ikea Koppla
-#define PLUGIN_015 // Home Easy EU
+// #define PLUGIN_002 // Lacrosse v2 2300/3600
+// #define PLUGIN_003 // Kaku : Klik-Aan-Klik-Uit (with code wheel) aka ARC
+// #define PLUGIN_004 // NewKAKU : Klik-Aan-Klik-Uit with automatic coding aka Intertechno.
+// #define PLUGIN_005 // Eurodomest
+// #define PLUGIN_006 // Blyss
+// #define PLUGIN_007 // Conrad RSL2
+// #define PLUGIN_008 // Kambrook
+// #define PLUGIN_009 // X10 RF
+// #define PLUGIN_010 // TRC02 RGB Switch
+// #define PLUGIN_011 // Home Confort
+// #define PLUGIN_012 // Flamingo FA500R
+// #define PLUGIN_013 // Powerfix/Quigg
+// #define PLUGIN_014 // Ikea Koppla
+// #define PLUGIN_015 // Home Easy EU
 // -------------------
 // Weather sensors
 // -------------------
-#define PLUGIN_029 // Alecto V2 (WS3000/DWK2012) 434 MHz.
-#define PLUGIN_030 // Alecto V1 (WS3500) 434 MHz.
-#define PLUGIN_031 // Alecto V3 (WS1100/WS1200/WSD-19) 433.9 MHz.
-#define PLUGIN_032 // Alecto V4
-#define PLUGIN_033 // Conrad Pool Thermometer
-#define PLUGIN_034 // Cresta
-#define PLUGIN_035 // Imagintronix
-#define PLUGIN_036 // F007_TH
-#define PLUGIN_037 // Accurite 986 Thermometer
-#define PLUGIN_040 // Mebus
-#define PLUGIN_041 // LaCrosse v3 ws7000
-#define PLUGIN_042 // UPM/Esic
-#define PLUGIN_043 // LaCrosse v1
-#define PLUGIN_044 // Auriol v3
-#define PLUGIN_045 // Auriol
-#define PLUGIN_046 // Auriol v2 / Xiron
-#define PLUGIN_047 // Auriol v4
+// #define PLUGIN_029 // Alecto V2 (WS3000/DWK2012) 434 MHz.
+// #define PLUGIN_030 // Alecto V1 (WS3500) 434 MHz.
+// #define PLUGIN_031 // Alecto V3 (WS1100/WS1200/WSD-19) 433.9 MHz.
+// #define PLUGIN_032 // Alecto V4
+// #define PLUGIN_033 // Conrad Pool Thermometer
+// #define PLUGIN_034 // Cresta
+// #define PLUGIN_035 // Imagintronix
+// #define PLUGIN_036 // F007_TH
+// #define PLUGIN_037 // Accurite 986 Thermometer
+// #define PLUGIN_040 // Mebus
+// #define PLUGIN_041 // LaCrosse v3 ws7000
+// #define PLUGIN_042 // UPM/Esic
+// #define PLUGIN_043 // LaCrosse v1
+// #define PLUGIN_044 // Auriol v3
+// #define PLUGIN_045 // Auriol
+// #define PLUGIN_046 // Auriol v2 / Xiron
+// #define PLUGIN_047 // Auriol v4
 #define PLUGIN_048 // Oregon V1/2/3
 // -------------------
 // Motion Sensors, include when needed
 // -------------------
-#define PLUGIN_060 // Ajax Chubb Varel 433 MHz. motion sensors
-#define PLUGIN_061 // Chinese PIR motion door and window sensors
+// #define PLUGIN_060 // Ajax Chubb Varel 433 MHz. motion sensors
+// #define PLUGIN_061 // Chinese PIR motion door and window sensors
 #define PLUGIN_062 // Chuango Alarm Devices
-#define PLUGIN_063 // Oregon PIR/ALARM/LIGHT
-#define PLUGIN_064 // Atlantic (and Visonic)
-#define PLUGIN_065 // custom garage doors
+// #define PLUGIN_063 // Oregon PIR/ALARM/LIGHT
+// #define PLUGIN_064 // Atlantic (and Visonic)
+// #define PLUGIN_065 // custom garage doors
 // -------------------
 // Doorbells
 // -------------------
-#define PLUGIN_070 // Select Plus (Action - Quhwa)
-#define PLUGIN_071 // Plieger York
-#define PLUGIN_072 // Byron SX doorbell
-#define PLUGIN_073 // Deltronic doorbell
-#define PLUGIN_074 // RL02
-#define PLUGIN_075 // Silvercrest
+// #define PLUGIN_070 // Select Plus (Action - Quhwa)
+// #define PLUGIN_071 // Plieger York
+// #define PLUGIN_072 // Byron SX doorbell
+// #define PLUGIN_073 // Deltronic doorbell
+// #define PLUGIN_074 // RL02
+// #define PLUGIN_075 // Silvercrest
 // -------------------
 // Smoke detectors / Fire Places
 // -------------------
-#define PLUGIN_080 // Flamingo FA20 / KD101 smoke detector
-#define PLUGIN_081 // Mertik Maxitrol / Dru fireplace
-#define PLUGIN_082 // Mertik Maxitrol / Dru fireplace
+// #define PLUGIN_080 // Flamingo FA20 / KD101 smoke detector
+// #define PLUGIN_081 // Mertik Maxitrol / Dru fireplace
+// #define PLUGIN_082 // Mertik Maxitrol / Dru fireplace
 #define PLUGIN_083 // BrelMotor
 #define PLUGIN_084 // WEATHER
 
@@ -101,7 +101,7 @@
 // -- Any of the following protocols can be excluded whenever not needed --
 // ------------------------------------------------------------------------
 // #define PLUGIN_TX_003           // Kaku : Klik-Aan-Klik-Uit (with code wheel) aka ARC
-#define PLUGIN_TX_004 // NewKAKU : Klik-Aan-Klik-Uit with automatic coding aka Intertechno.
+// #define PLUGIN_TX_004 // NewKAKU : Klik-Aan-Klik-Uit with automatic coding aka Intertechno.
 // #define PLUGIN_TX_005           // Eurodomest
 // #define PLUGIN_TX_006           // Blyss
 // #define PLUGIN_TX_007           // Conrad RSL2

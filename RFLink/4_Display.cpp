@@ -7,6 +7,7 @@
 
 #include <Arduino.h>
 #include "RFLink.h"
+#include "2_Signal.h"
 #include "3_Serial.h"
 #include "4_Display.h"
 
@@ -19,7 +20,7 @@ char pbuffer[PRINT_BUFFER_SIZE]; // Buffer for complete message data
 // ------------------- //
 
 #if (defined(__AVR_ATmega328P__) || defined(__AVR_ATmega2560__))
-#error "For AVR plaforms, in all sprintf_P above, please replace %s with %S"
+#error "For AVR plaforms, in all sprintf_P above, please replace %s with %s"
 #endif
 
 // Common Header
@@ -202,6 +203,13 @@ void display_RAIN(unsigned int input)
   strcat(pbuffer, dbuffer);
 }
 
+// RAINTOT=1234 => Total rain in mm. (hexadecimal) 0x8d = 141 decimal = 14.1 mm (needs division by 10)
+void display_RAINTOT(unsigned int input)
+{
+  sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";RAINTOT="), input);
+  strcat(pbuffer, dbuffer);
+}
+
 // RAINRATE=1234 => Rain rate in mm. (hexadecimal) 0x8d = 141 decimal = 14.1 mm (needs division by 10)
 void display_RAINRATE(unsigned int input)
 {
@@ -341,12 +349,49 @@ void display_RGBW(unsigned int input)
   strcat(pbuffer, dbuffer);
 }
 
+// DEBUG=..... => provide DEBUG Data
+void display_DEBUG(byte data[], unsigned int size)
+{
+  sprintf_P(dbuffer, PSTR("%s"), PSTR(";DEBUG="));
+  strcat(pbuffer, dbuffer);
+
+  char buffer[size*2 + 1];
+  for (unsigned int i = 0; i < size; i++)
+  {
+    sprintf_P(buffer+i*2, PSTR("%02x"), data[i]);
+  }
+
+  strcat(pbuffer, buffer);
+}
+
+void debugRawSignal(RawSignalStruct RawSignal, int size) 
+{
+   char dbuffer[64];
+
+   sprintf_P(dbuffer, PSTR("Pulses %04d Multiply %04d: "), 
+            RawSignal.Number, RawSignal.Multiply, RawSignal.Time);
+   Serial.print(dbuffer);
+
+   for (int i=0; i<size; i++) 
+   {
+      sprintf_P(dbuffer, PSTR("%d "), RawSignal.Pulses[i]*RawSignal.Multiply);
+      Serial.print(dbuffer);
+   }
+
+   Serial.println();
+}
 
 // Channel
 void display_CHAN(byte channel)
 {
   sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";CHN="), channel);
   strcat(pbuffer, dbuffer);
+}
+
+// Add whatever you want to buffer
+// for ECHO purpose
+void display_BUFFER(const char *input) {
+  strcat(pbuffer, input);
 }
 
 // --------------------- //
@@ -669,3 +714,23 @@ String GPIO2String(uint8_t uGPIO)
     return "NOT_A_PIN";
 }
 #endif // ESP32
+
+/**
+ * @see https://stackoverflow.com/questions/111928/is-there-a-printf-converter-to-print-in-binary-format
+ * Assumes little endian
+ */
+void printBits(size_t const size, void const * const ptr)
+{
+    unsigned char *b = (unsigned char*) ptr;
+    unsigned char byte;
+    int i, j;
+    char dbuffer[2];
+
+    for (i = size-1; i >= 0; i--) {
+        for (j = 7; j >= 0; j--) {
+            byte = (b[i] >> j) & 1;
+            Serial.print(byte);
+        }
+    }
+    Serial.println();
+}
